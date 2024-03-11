@@ -2,17 +2,16 @@ from fastapi import APIRouter
 
 router_shifts = APIRouter()
 
-@router_shifts.post("/add") # добавление списка сменных заданий
+@router_shifts.post("/add_shift_task") # добавление списка сменных заданий
 def tasks_add():
     return {"message": "shift"}
 
 @router_shifts.post("/") # получение списка сменных заданий
 def tasks_list():
-    return {"message": "tasks_list-"}
+    return {"message": "tasks_list"}
 
 @router_shifts.get("/get_task")
 def get_task(): # получение сменного задания по id
-    return {"message": "get_task"}
     return {"message": "get_task"}
 
 @router_shifts.put("/update_task")

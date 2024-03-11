@@ -6,7 +6,8 @@ from sqlalchemy import pool
 from alembic import context
 
 from config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
-from models import metadata
+from models.model_shift import metadata
+print(f'postgresql://%{DB_USER}s:%{DB_PASS}s@%{DB_HOST}s:%{DB_PORT}s/%{DB_NAME}s')
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
