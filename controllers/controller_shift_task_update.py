@@ -8,7 +8,9 @@ from fastapi import Depends
 
 
 def shift_task_update(
-    item: ShiftTaskUpdate, item_id: int, db: Session = Depends(get_db)
+    item: ShiftTaskUpdate,
+    item_id: int,
+    db: Session = Depends(get_db),
 ):
     shift_task = db.query(ShiftTask).get(item_id)
     if not shift_task:

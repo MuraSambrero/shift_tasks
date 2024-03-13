@@ -4,10 +4,12 @@ from fastapi import HTTPException, status
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from database.db import get_db
-from fastapi import Query
 
 
-def get_shift_task(item_id: int = Query(), db: Session = Depends(get_db)):
+def get_shift_task(
+    item_id: int,
+    db: Session = Depends(get_db),
+):
     shift_task = db.query(ShiftTask).get(item_id)
     code_products = shift_task.code_products
     shift_task = ShiftTaskPydantic(**shift_task.__dict__)

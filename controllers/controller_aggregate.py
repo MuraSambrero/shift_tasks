@@ -7,8 +7,10 @@ from fastapi import HTTPException
 from datetime import datetime
 
 
-
-def aggregate_product(item: Aggregate, db: Session = Depends(get_db)):
+def aggregate_product(
+    item: Aggregate,
+    db: Session = Depends(get_db),
+):
     shift_task = db.query(ShiftTask).get(item.id)
     if not shift_task:
         raise HTTPException(
