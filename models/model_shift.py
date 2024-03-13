@@ -38,12 +38,7 @@ class ShiftTask(Base):
 class CodeProduct(Base):
     __tablename__ = "code_product"
     id = Column(Integer, primary_key=True, unique=True)
-    code_product = Column(String, unique=True)
-    # id = Column(
-    #     String,
-    #     primary_key=True,
-    #     max_length=255,
-    # )  # униукальный код продукции
+    code_product = Column(String, unique=True, nullable=False)
     is_aggregated = Column(Boolean, default=False)
     aggregated_at = Column(DateTime)
     shift_task_id = Column(Integer, ForeignKey("shift_task.id"))

@@ -2,6 +2,7 @@ from database.base import ShiftTask
 from schemas.schemas_shift import ShiftTaskPydantic
 from fastapi import HTTPException, status
 
+
 def get_shift_task(item_id, db):
     shift_task = db.query(ShiftTask).get(item_id)
     code_products = shift_task.code_products

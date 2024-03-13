@@ -1,4 +1,6 @@
 from pydantic import BaseModel, Field
+from typing import Optional
+from pydantic._internal._model_construction import ModelMetaclass
 from datetime import datetime, date
 
 
@@ -35,3 +37,30 @@ class ShiftTaskPydantic(BaseModel):
     id_rc: str = Field(serialization_alias="ИдентификаторРЦ")
     datetime_begin: datetime = Field(serialization_alias="ДатаВремяНачалаСмены")
     datetime_end: datetime = Field(serialization_alias="ДатаВремяОкончанияСмены")
+    
+
+class ShiftTaskUpdate(BaseModel):
+    closing_status: Optional[bool] = None
+    shift_task: Optional[str] = None
+    work_center: Optional[str] = None
+    shift: Optional[str] = None
+    team_number: Optional[str] = None
+    batch_number: Optional[int] = None
+    batch_date: Optional[date] = None
+    product: Optional[str] = None
+    product_code_ekn: Optional[str] = None
+    id_rc: Optional[str] = None
+    datetime_begin: Optional[datetime] = None
+    datetime_end: Optional[datetime] = None
+
+
+class CodeProductAdd(BaseModel):
+    code_product: str = Field(alias="УникальныйКодПродукта")
+    batch_number: int = Field(alias="НомерПартии")
+    batch_date: date = Field(alias="ДатаПартии")
+
+
+class Aggregate(BaseModel):
+    id: int = Field(alias="ID")
+    code_product: str = Field(alias="УникальныйКодПродукта")
+
