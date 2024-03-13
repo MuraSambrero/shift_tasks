@@ -2,26 +2,16 @@ from database.base import ShiftTask
 from sqlalchemy.exc import IntegrityError
 from psycopg2.errors import UniqueViolation
 from schemas.schemas_shift import ShiftTaskAdd
+from fastapi import Depends
+from sqlalchemy.orm import Session
+from database.db import get_db
 
 
 
-def add_list_shift_task(items: list[ShiftTaskAdd], db) -> list:
+def add_list_shift_task(items: list[ShiftTaskAdd], db: Session = Depends(get_db)) -> list:
     status_add_list = []
     for item in items:
-        shift_task = ShiftTask(
-            closing_status = item.closing_status,
-            shift_task = item.shift_task,
-            work_center = item.work_center,
-            shift = item.shift,
-            team_number = item.team_number,
-            batch_number = item.batch_number,
-            batch_date = item.batch_date,
-            product = item.product,
-            product_code_ekn = item.product_code_ekn,
-            id_rc = item.id_rc,
-            datetime_begin = item.datetime_begin,
-            datetime_end = item.datetime_end,
-        )
+        shift_task = ShiftTask(**item.model_dump())
         status_add = add_shift_task(shift_task, db)
         status_add_list.append(status_add)
     return status_add_list
